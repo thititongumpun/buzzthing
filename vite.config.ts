@@ -3,6 +3,7 @@ import { devtools } from '@tanstack/devtools-vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import viteReact from '@vitejs/plugin-react'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
+import { nitro } from 'nitro/vite'
 import { fileURLToPath, URL } from 'url'
 import { VitePWA } from 'vite-plugin-pwa'
 
@@ -49,6 +50,7 @@ const config = defineConfig({
       },
     }),
     tanstackStart(),
+    nitro(),
     viteReact(),
   ],
 })
