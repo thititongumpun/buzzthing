@@ -19,7 +19,7 @@ interface Job {
 const jobsQueryOptions = queryOptions({
   queryKey: ['jobs'],
   queryFn: async (): Promise<Job[]> => {
-    const response = await fetch('https://notifything.thitit.beer/jobs')
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/jobs`)
     if (!response.ok) {
       throw new Error('Failed to fetch jobs')
     }

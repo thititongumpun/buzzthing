@@ -54,7 +54,7 @@ interface Job {
 const jobQueryOptions = (id: string) => queryOptions({
   queryKey: ['jobs', id],
   queryFn: async (): Promise<Job> => {
-    const response = await fetch(`https://notifything.thitit.beer/jobs/${id}`)
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/jobs/${id}`)
     if (!response.ok) {
       throw new Error('Failed to fetch job details')
     }
@@ -77,7 +77,7 @@ function JobDetailPage() {
 
   const toggleMutation = useMutation({
     mutationFn: async (newEnabled: boolean) => {
-      const response = await fetch(`https://notifything.thitit.beer/jobs/${job.id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/jobs/${job.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ function JobDetailPage() {
 
   const deleteMutation = useMutation({
     mutationFn: async () => {
-      const response = await fetch(`https://notifything.thitit.beer/jobs/${job.id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/jobs/${job.id}`, {
         method: 'DELETE',
       })
       if (!response.ok) {
@@ -401,7 +401,7 @@ function CreatePaymentDialog({ plan, nextMonth }: { plan: PaymentPlan, nextMonth
         dueDate: new Date(formData.dueDate).toISOString()
       }
 
-      const response = await fetch('https://notifything.thitit.beer/payments', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/payments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
